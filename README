@@ -4,10 +4,14 @@ Requires: Python 2.6 or greater (I think).  Probably only works on Linux based O
 
 To Run:
     1. Make sure you have everything required
-    2. run (as root) python corky.py debug - if the server starts you should be good to go, if not fix what's wrong
-    3. run python corky.py start  to start corky, visit http://YOURIP:8000
-    4. To stop or restart(new plugins installed) using python corky.py [stop|restart]
+    2. run (as root) /usr/bin/python corky.py debug - if the server starts you should be good to go, if not fix what's wrong
+    3. run /usr/bin/python corky.py start  - this will start corky, visit http://YOUR-IP:8000 and you should see a welcome message
+    4. To stop or restart(new plugins installed) using /usr/bin/python corky.py [stop|restart]
 
+Tips:
+    You might want to run Corky on cron in case it goes down for some reason.  Simply add this to your root cron to start Corky very minute. If it's already running it will simply die. Make sure corky.py is actually the full path the where you've stored the corky script
+
+    * * * * * /usr/bin/python corky.py start
 
 Plugins:
     SysInfo: General system information, cpu, load, memory , etc.

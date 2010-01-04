@@ -6,12 +6,12 @@ class SysInfo():
     def __init__(self):
     	print "Loading SysInfo Plugin."
 
-    def sysload(self):
+    def sysload(self,config):
         load = open("/proc/loadavg","rb").read()
         load = string.split(load,' ')
         return { 'one' : load[0], 'five' : load[1], 'fifteen' : load[2] }
 
-    def memory(self):
+    def memory(self,config):
         mem_info = {}
         memory = open("/proc/meminfo","rb").read()
         memory = string.split(memory,"\n")
