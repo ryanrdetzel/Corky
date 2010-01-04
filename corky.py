@@ -65,14 +65,14 @@ def import_module(path,name,unique_name, globals=None, locals=None, fromlist=Non
         if fp:
             fp.close()
 
-
 def main():
     try:
         server = HTTPServer(('', 8000), BasicWeb)
         print 'started httpserver...'
 
         ## Load plugins
-        plugins = os.listdir(os.path.realpath(os.path.dirname(sys.argv[0])) + "/plugins")
+        plugins = os.listdir( os.path.dirname( os.path.realpath( __file__ )) + "/plugins")
+
         for plugin in plugins:
             if plugin.endswith(".py"):
                 try:
@@ -95,7 +95,7 @@ class SDaemon(Daemon):
 
 	
 if __name__ == '__main__':
-    sys.path.append(os.path.realpath(os.path.dirname(sys.argv[0])) + "/plugins")
+    sys.path.append( os.path.dirname( os.path.realpath( __file__ )) + "/plugins")
 
     daemon = SDaemon('/tmp/daemon-example.pid','/tmp/log','/tmp/log', '/tmp/log')
     if len(sys.argv) == 2:
