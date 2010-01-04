@@ -8,6 +8,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from daemon import Daemon
 
 valid_plugins = {}
+corky_path = ""
 
 class BasicWeb(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
@@ -71,7 +72,7 @@ def main():
         print 'started httpserver...'
 
         ## Load plugins
-        plugins = os.listdir( os.path.dirname( os.path.realpath( __file__ )) + "/plugins")
+        plugins = os.listdir(corky_path + "/plugins")
 
         for plugin in plugins:
             if plugin.endswith(".py"):
@@ -95,7 +96,8 @@ class SDaemon(Daemon):
 
 	
 if __name__ == '__main__':
-    sys.path.append( os.path.dirname( os.path.realpath( __file__ )) + "/plugins")
+    corky_path = os.path.dirname(os.path.dirname( os.path.realpath( __file__ ))  + "/plugins")
+    sys.path.append(corky_path + "/plugins")
 
     daemon = SDaemon('/tmp/daemon-example.pid','/tmp/log','/tmp/log', '/tmp/log')
     if len(sys.argv) == 2:
