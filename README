@@ -1,9 +1,15 @@
 Corky 0.1
     
-Requires: Python 2.6 or greater (I think)
+Requires: Python 2.6 or greater (I think).  Probably only works on Linux based OS'
 
 To Run:
     1. Make sure you have everything required
     2. run (as root) python corky.py debug - if the server starts you should be good to go, if not fix what's wrong
     3. run python corky.py start  to start corky, visit http://YOURIP:8000
     4. To stop or restart(new plugins installed) using python corky.py [stop|restart]
+
+
+Plugins:
+    SysInfo: General system information, cpu, load, memory , etc.
+        sysload: Shows 1,5,15 minute average load
+        memory: Shows free, used, used percentage and total memory
