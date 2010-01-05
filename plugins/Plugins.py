@@ -4,7 +4,7 @@ class Plugins():
     def __init__(self):
         print "Loading Plugins Plugin."
 
-    def installed(self,config):
+    def installed(self,config,args):
         plugins = os.listdir(config['corky_path'] + "/plugins")
 
         installed = []

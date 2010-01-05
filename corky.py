@@ -1,6 +1,7 @@
 import string,cgi,time,sys,imp
 import os
 import json
+import urlparse
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from daemon import Daemon
@@ -29,6 +30,17 @@ class BasicWeb(BaseHTTPRequestHandler):
         if allowed == False:
             self.send_error(403,'')
             return
+
+        ## Parse params
+        scheme, host, path, parameters, query, fragment = urlparse.urlparse(self.path)
+        args = {}
+        for pair in query.split("&"):
+            if pair.find("=") >= 0:
+                key, value = pair.split("=", 1)
+                args.setdefault(key, []).append(value)
+            else:
+                args[pair] = []
+
         try:
             if self.path.endswith(".html"):
                 if os.path.isfile("static" + self.path):
@@ -58,7 +70,7 @@ class BasicWeb(BaseHTTPRequestHandler):
                 if valid_plugins.has_key(parts[1]):
                     try:
                         func = getattr(valid_plugins[parts[1]], parts[2])
-                        result = func(config)
+                        result = func(config,args)
                         if result is not None:
                             self.wfile.write(json.dumps(result))
                     except AttributeError:
